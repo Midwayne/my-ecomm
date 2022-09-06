@@ -32,7 +32,7 @@ function App() {
   return (
     <>
       <div>
-        <Directory />
+        <Directory categories={categories}/>
       </div>
     </>
   );
