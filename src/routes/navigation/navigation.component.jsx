@@ -23,20 +23,22 @@ const Navigation = () => {
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
           <Link className="navbar-brand" to="/"><CrownLogo className="logo" /></Link>
-          {/*<a className="navbar-brand" href="/">Navbar</a>*/}
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div className="navbar-nav">
                   <Link className="nav-link" to="/shop">Shop</Link>
-                  {
-                    currentUser ? (
-                      <button className="nav-link active" onClick={signOutHandler}>Sign Out</button> 
+                  {currentUser ? (
+                      <span className='nav-link' onClick={signOutHandler}>
+                        {' '}
+                        SIGN OUT{' '}
+                      </span>
                     ) : (
-                      <Link className="nav-link active" to="/auth">Sign In</Link>
-                    )
-                  }
+                      <Link className='nav-link' to='/auth'>
+                        SIGN IN
+                      </Link>
+                  )}
 
               </div>
         </div>
