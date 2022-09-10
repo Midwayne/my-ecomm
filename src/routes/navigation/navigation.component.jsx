@@ -7,9 +7,16 @@ import {ReactComponent as CrownLogo} from '../../assets/crown.svg';
 import {useContext} from 'react';
 import { UserContext } from "../../contexts/user.context";
 
+import { signOutUser } from "../../utils/firebase/firebase.utils";
+
 const Navigation = () => {
 
-  const currentUser = useContext(UserContext);
+  const {currentUser, setCurrentUser} = useContext(UserContext);
+
+  const signOutHandler = async () => {
+    const res = await signOutUser();
+    setCurrentUser(null);
+  }
 
   return(
     <>
@@ -22,15 +29,14 @@ const Navigation = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div className="navbar-nav">
-                  <Link className="nav-link active" to="/auth">Sign In</Link>
                   <Link className="nav-link" to="/shop">Shop</Link>
-                  
-                  {/*}
-                  <a className="nav-link active" aria-current="page" href="/">Home</a>
-                  <a className="nav-link" href="/">Features</a>
-                  <a className="nav-link" href="/">Pricing</a>
-                  <a className="nav-link disabled">Disabled</a>
-                  */}
+                  {
+                    currentUser ? (
+                      <button className="nav-link active" onClick={signOutHandler}>Sign Out</button> 
+                    ) : (
+                      <Link className="nav-link active" to="/auth">Sign In</Link>
+                    )
+                  }
 
               </div>
         </div>

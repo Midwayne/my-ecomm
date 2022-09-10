@@ -35,7 +35,7 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      const response = await signInAuthUserWithEmailAndPassword(email, password);
+      const {user} = await signInAuthUserWithEmailAndPassword(email, password);
       setCurrentUser(user);
       resetFormFields();
 
