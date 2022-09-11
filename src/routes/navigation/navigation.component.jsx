@@ -1,48 +1,48 @@
-import { Outlet, Link } from "react-router-dom";
+import { Fragment, useContext } from 'react';
+import { Outlet, Link } from 'react-router-dom';
 
-import 'bootstrap/dist/css/bootstrap.min.css'
+import { UserContext } from '../../contexts/user.context';
 
-import {ReactComponent as CrownLogo} from '../../assets/crown.svg';
 
-import {useContext} from 'react';
-import { UserContext } from "../../contexts/user.context";
+import CartIcon from '../../components/cart-icon/cart-icon.component';
+import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
+import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
 
-import { signOutUser } from "../../utils/firebase/firebase.utils";
+import { signOutUser } from '../../utils/firebase/firebase.utils';
+
+import './navigation.styles.scss';
 
 const Navigation = () => {
+  const { currentUser } = useContext(UserContext);
 
-  const {currentUser} = useContext(UserContext);
 
+  return (
+    <Fragment>
+      <div className='navigation'>
+        <Link className='logo-container' to='/'>
+          <CrwnLogo className='logo' />
+        </Link>
+        <div className='nav-links-container'>
+          <Link className='nav-link' to='/shop'>
+            SHOP
+          </Link>
 
-  return(
-    <>
-    <nav className="navbar navbar-expand-lg bg-light">
-      <div className="container-fluid">
-          <Link className="navbar-brand" to="/"><CrownLogo className="logo" /></Link>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div className="navbar-nav">
-                  <Link className="nav-link" to="/shop">Shop</Link>
-                  {currentUser ? (
-                      <span className='nav-link' onClick={signOutUser}>
-                        {' '}
-                        SIGN OUT{' '}
-                      </span>
-                    ) : (
-                      <Link className='nav-link' to='/auth'>
-                        SIGN IN
-                      </Link>
-                  )}
-
-              </div>
+          {currentUser ? (
+            <span className='nav-link' onClick={signOutUser}>
+              SIGN OUT
+            </span>
+          ) : (
+            <Link className='nav-link' to='/auth'>
+              SIGN IN
+            </Link>
+          )}
+          <CartIcon />
         </div>
+        <CartDropdown />
       </div>
-    </nav>
-    <Outlet />
-    </>
+      <Outlet />
+    </Fragment>
   );
-}
+};
 
 export default Navigation;
