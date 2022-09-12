@@ -11,7 +11,7 @@ const Category = () => {
     const {category} = useParams();
     const {categoriesMap} = useContext(CategoriesContext);
 
-    const {products, setProducts} = useState(categoriesMap[category]);
+    const [products, setProducts] = useState(categoriesMap[category]);
 
     useEffect(()=> {
         setProducts(categoriesMap[category]);
@@ -20,6 +20,7 @@ const Category = () => {
     return (
         <>
             
+            {/*<h2 className='category-title'>{category.toUpperCase()}</h2>*/}
             <h2 className='category-title'>{category.toUpperCase()}</h2>
             <div className='category-container'>
                 {
