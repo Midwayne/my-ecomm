@@ -1,4 +1,4 @@
-#UNDER CONSTRUCTION
+Deployed on https://my-ecomm.netlify.app
 
 # Getting Started with Create React App
 
